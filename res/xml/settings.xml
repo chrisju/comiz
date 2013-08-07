@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory android:title="@string/comicupdatesettings" >
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="comicupdatenotify"
+            android:title="@string/comicupdatenotify" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="allowautodownload"
+            android:title="@string/allowautodownload" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:dependency="allowautodownload"
+            android:key="onlywifi_auto"
+            android:layout="?android:attr/preferenceLayoutChild"
+            android:title="@string/onlywifi_auto" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/downloadsettings" >
+        <CheckBoxPreference
+            android:key="onlywifi"
+            android:title="@string/onlywifi" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/appsettings" >
+        <ListPreference
+            android:defaultValue="1"
+            android:entries="@array/pagenames"
+            android:entryValues="@array/pagevalues"
+            android:key="startpageindex"
+            android:title="@string/setstartpage" />
+        <ListPreference
+            android:defaultValue="1"
+            android:entries="@array/read_orientation"
+            android:entryValues="@array/read_orientation_values"
+            android:key="read_orientation"
+            android:title="@string/setreadorientation" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

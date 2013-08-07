@@ -1,0 +1,24 @@
+<resources>
+
+    <string-array name="screenorientation">
+        <item>自动</item>
+        <item>横屏</item>
+        <item>竖屏</item>
+    </string-array>
+
+    <!-- 页面名称 -->
+    <string-array name="pagenames">
+        <item>收藏</item>
+        <item>搜索</item>
+        <item>浏览</item>
+        <item>本地</item>
+        <item>传输</item>
+    </string-array>
+
+    <!-- 阅读方向 -->
+    <string-array name="read_orientation">
+        <item>从左往右</item>
+        <item>从右往左</item>
+    </string-array>
+
+</resources>

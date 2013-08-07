@@ -1,0 +1,65 @@
+<resources>
+
+    <string name="app_name">comiz</string>
+    <string name="app_dir">comiz.zz</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_main">comiz</string>
+    <string name="imgdesc">an image</string>
+    <string name="todo">to do</string>
+    <string name="search_hint">Ikkyu</string>
+    <string name="empty_local_hint">No downloaded comic</string>
+    <string name="empty_transmit_hint">No transfer tasks</string>
+    <string name="page_fav">Favorite</string>
+    <string name="page_search">Search</string>
+    <string name="page_roam">Browse</string>
+    <string name="page_local">Local</string>
+    <string name="page_transmit">Transmission</string>
+    <string name="pre_lesson">Last lesson</string>
+    <string name="next_lesson">Next lesson</string>
+    <string name="fit_width">Fit page width</string>
+    <string name="fit_height">Fit page high</string>
+    <string name="fit_origin">Original size</string>
+    <string name="screeen_orientation">Screen orientation</string>
+    <string name="redownloadpage">Re-download this page*</string>
+    <string name="nomore">No more</string>
+    <string name="checking">Checking %1$s...&#160;</string>
+    <string name="updatedto">Updated to %1$s</string>
+    <string name="alreadynewest">Already the latest</string>
+    <string name="invalid_sdcard">The SD card is not available</string>
+    <string name="add_to_fav">Add to Favorites</string>
+    <string name="added_to_fav">Has been added to Favorites</string>
+    <string name="remove_fav">Unsubscribe</string>
+    <string name="setreaded">Set Readed</string>
+    <string name="setallreaded">Set all Readed</string>
+    <string name="checkupdate">Check for Updates</string>
+    <string name="autodownload">Automatically download updates</string>
+    <string name="delete">Delete</string>
+    <string name="deleteall">Delete all</string>
+    <string name="deleteallconfirm">Are you sure to delete all?</string>
+    <string name="open_in_browser">Open in browser</string>
+    <string name="cancel_download">Cancel download</string>
+    <string name="task_added">Already added to download list</string>
+    <string name="too_many_tasks">Do not too many one time</string>
+    <string name="not_selected">Has not selected content</string>
+    <string name="failed_pre">Error:</string>
+    <string name="wifishuttip">No WIFI connection, setting is only download with WIFI</string>
+    <string name="updatenotify">%1$s has updated to %2$s</string>
+    <string name="multiupdatenotify">%1$s has updates</string>
+    <string name="autodownloadfinish">%1$s%2$s downloaded</string>
+    <string name="low_sdk1">Low than 2.1 system does not support the internal browser, and use other tools to view the picture \n comicsi files are in %s - subfolder of the SD card root directory folder</string>
+    
+<string name="autodownloadtip">Seted to automatically download %1$s update</string>
+<string name="setautodownloadtip">&#160;Please turn on the automatic download feature in the settings</string>
+<string name="notautodownloadtip">Has been canceled automatically download %1$s update</string>
+
+<string name="menu_settings">Settings</string>
+<string name="comicupdatesettings">Comic update settings</string>
+	<string name="comicupdatenotify">Comic update notification</string>
+	<string name="allowautodownload">Allow automatically download updates</string>
+		<string name="onlywifi_auto">Only use Wifi</string>
+<string name="downloadsettings">Download Settings</string>
+	<string name="onlywifi">Only use Wifi for Download</string>
+<string name="appsettings">Program settings</string>
+	<string name="setstartpage">Start Page</string>
+	<string name="setreadorientation">Reading direction</string>
+</resources>

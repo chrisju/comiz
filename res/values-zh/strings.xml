@@ -1,0 +1,66 @@
+<resources>
+
+    <string name="app_name">comiz</string>
+    <string name="app_dir">comiz.zz</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_main">comiz</string>
+    <string name="imgdesc">an image</string>
+    <string name="todo">to do</string>
+    <string name="search_hint">一休和尚</string>
+    <string name="empty_local_hint">還沒有下載漫畫哦</string>
+    <string name="empty_transmit_hint">沒有傳輸任務</string>
+    <string name="page_fav">收藏</string>
+    <string name="page_search">搜索</string>
+    <string name="page_roam">瀏覽</string>
+    <string name="page_local">本地</string>
+    <string name="page_transmit">傳輸</string>
+    <string name="pre_lesson">上一話</string>
+    <string name="next_lesson">下一話</string>
+    <string name="fit_width">適合頁寬</string>
+    <string name="fit_height">適合頁高</string>
+    <string name="fit_origin">原始大小</string>
+    <string name="screeen_orientation">屏幕方向</string>
+    <string name="redownloadpage">重新下載本頁*</string>
+    <string name="nomore">沒有了</string>
+    <string name="checking">檢查 %1$s... </string>
+    <string name="updatedto">已更新到 %1$s</string>
+    <string name="alreadynewest">已最新</string>
+    <string name="invalid_sdcard">SD卡不可用</string>
+    <string name="add_to_fav">添加到收藏</string>
+    <string name="added_to_fav">已添加到收藏</string>
+    <string name="remove_fav">取消收藏</string>
+    <string name="setreaded">設為已讀</string>
+    <string name="setallreaded">全部設為已讀</string>
+    <string name="checkupdate">檢查更新</string>
+    <string name="autodownload">自動下載更新</string>
+    <string name="delete">刪除</string>
+    <string name="deleteall">刪除所有</string>
+    <string name="deleteallconfirm">確認刪除所有?</string>
+    <string name="open_in_browser">在瀏覽器中打開</string>
+    <string name="cancel_download">取消下載</string>
+    <string name="task_added">已加入下載列表</string>
+    <string name="too_many_tasks">為了網站不要一次下太多</string>
+    <string name="not_selected">未選擇內容</string>
+    <string name="failed_pre">錯誤:</string>
+    <string name="wifishuttip">沒有wifi連接 當前設置為僅用wifi下載</string>
+    <string name="updatenotify">%1$s已更新到%2$s</string>
+    <string name="multiupdatenotify">%1$s已更新</string>
+    <string name="autodownloadfinish">%1$s%2$s已下載</string>
+    <string name="low_sdk1">2.1以下的系統不支持內部瀏覽器,請使用其它工具查看圖片
+漫畫在SD卡根目錄的%s文件夾下</string>
+    
+<string name="autodownloadtip">已設置自動下載%s更新</string>
+<string name="setautodownloadtip"> 請在設置中開啟自動下載功能</string>
+<string name="notautodownloadtip">已取消自動下載%s更新</string>
+
+<string name="menu_settings">設置</string>
+<string name="comicupdatesettings">漫畫更新設置</string>
+	<string name="comicupdatenotify">漫畫更新通知</string>
+	<string name="allowautodownload">允許自動下載更新</string>
+		<string name="onlywifi_auto">僅 Wifi</string>
+<string name="downloadsettings">下載設置</string>
+	<string name="onlywifi">僅使用Wifi下載</string>
+<string name="appsettings">程序設置</string>
+	<string name="setstartpage">起始頁</string>
+	<string name="setreadorientation">閱讀方向</string>
+</resources>

@@ -1,0 +1,39 @@
+<resources>
+
+    <string-array name="screenorientation">
+        <item>Auto</item>
+        <item>Landscape</item>
+        <item>Portrait</item>
+    </string-array>
+
+    <!-- 页面名称 -->
+    <string-array name="pagenames">
+        <item>Fav</item>
+        <item>Search</item>
+        <item>Browse</item>
+        <item>Local</item>
+        <item>Transmit</item>
+    </string-array>
+
+    <!-- 页面索引 -->
+    <string-array name="pagevalues">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+    <!-- 阅读方向 -->
+    <string-array name="read_orientation">
+        <item>Left to right</item>
+        <item>Right to left</item>
+    </string-array>
+
+    <!-- 阅读方向 -->
+    <string-array name="read_orientation_values">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+</resources>
