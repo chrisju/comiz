@@ -28,10 +28,10 @@ public class MyViewPager {
 		this.context = ctx;
 		this.mTab = pages;
 
+		initViewList();
+
 		myAdapter = new MyPagerAdapter();
 		pages.setAdapter(myAdapter);
-
-		initViewList();
 
 		setOnPageChangeListener(pages);
 	}
