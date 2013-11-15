@@ -20,7 +20,8 @@ if __name__ == '__main__':
 
     key='孩子'
     #lg.dofile('10_sfacg.lua')
-    lg.dofile('2_xindm.lua')
+    lg.dofile('0_kkkmh.lua')
+    #lg.dofile('2_xindm.lua')
 
     # init network
     cj = http.cookiejar.CookieJar()
