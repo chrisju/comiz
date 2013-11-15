@@ -66,9 +66,8 @@ public class DownloadTask {
 				// 需要再下载picpage并分析 getpics函数需要在匹配不到图片时匹配到一个下载地址
 				String[] ss = StringUtils.splitByWholeSeparatorPreserveAllTokens(url, "//");
 				String[] ss2 = StringUtils.splitByWholeSeparatorPreserveAllTokens(ss[1], "/");
-				Log.e("zz", ss[0] + "//" + ss2[0] + urls[0]);
-				url = ss[0] + "//" + ss2[0] + urls[0];
-				getPicUrls(url, cachefile);
+				Log.e("zz", urls[0]);
+				getPicUrls(urls[0], cachefile);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

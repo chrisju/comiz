@@ -16,9 +16,10 @@ if __name__ == '__main__':
     lg = lua.globals()
     lg.dofile('common.lua')
     f=lg.strip
-    print(f('\t   sdsa\t '),f)
+    print(f('\t   测试lua\t '),f)
 
     key='孩子'
+    #lg.dofile('10_sfacg.lua')
     lg.dofile('2_xindm.lua')
 
     # init network
@@ -34,7 +35,11 @@ if __name__ == '__main__':
     file='out.html'
 
     # search
+    #key1=key.encode(cfg[4])
+    #key2=urllib.parse.quote(key1)
+    #print(key,key1,key2)
     key=util.urlencode(key,cfg[4])
+    key=key.replace('%5C','%')
     print(key)
 
     scfg=[]
@@ -45,11 +50,13 @@ if __name__ == '__main__':
 
     if scfg[2] == 'POST':
         res = request.urlopen(scfg[0],scfg[1].encode())
-        print(res.status, res.reason)
-        s = res.read()
-        s = util.convert(s,cfg[1])
-        with open(file,'wb') as f:
-            f.write(s)
+    elif scfg[2] == 'GET':
+        res = request.urlopen(scfg[0] + '?' + scfg[1])
+    print(res.status, res.reason)
+    s = res.read()
+    s = util.convert(s,cfg[1])
+    with open(file,'wb') as f:
+        f.write(s)
 
     # getcomic
     comics = []
@@ -78,15 +85,23 @@ if __name__ == '__main__':
     # get pics
     pics = []
     n,t=lg.getpics(file)
+    print('pic count:',n)
+    while n == 1:
+        print(t[1])
+        util.geturl(t[1],file,cfg[1])
+        n,t=lg.getpics(file)
     for i in range(n):
         pics.append(t[i+1])
         print(t[i+1])
 
     print(cj)
     # download pics
-    os.remove('1.jpg')
+    pic='1.jpg'
+    if os.path.exists(pic):
+        os.remove(pic)
     print('down pic:',pics[0],'referer:',url)
-    util.geturl(pics[0],'1.jpg',referer=url)
+    util.geturl(pics[0],pic,referer=url)
+    os.system('feh ' + pic)
 
 
 

@@ -8,6 +8,7 @@ import urllib.request as request
 import http.cookiejar
 
 def urlencode(s,charset):
+    print(s.encode(charset))
     return urllib.parse.quote(s.encode(charset))
 
 def convert(bs,charset_src,charset_dst='utf8'):
