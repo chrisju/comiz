@@ -21,6 +21,11 @@ if __name__ == '__main__':
     key='孩子'
     lg.dofile('2_xindm.lua')
 
+    # init network
+    cj = http.cookiejar.CookieJar()
+    opener = request.build_opener(request.HTTPCookieProcessor(cj))
+    request.install_opener(opener)
+
     cfg=[]
     n,t=lg.getconfig()
     for i in range(n):
@@ -53,8 +58,9 @@ if __name__ == '__main__':
         comics.append(t[i+1])
         print(t[i+1])
 
+    # get a comic
     url=comics[0].split('||')[3]
-    print(url)
+    print('use:',url)
     util.geturl(url,file,cfg[1])
 
     # get parts
@@ -63,13 +69,27 @@ if __name__ == '__main__':
     for i in range(n):
         parts.append(t[i+1])
         print(t[i+1])
+
+    # get a part
+    url=parts[0].split('||')[1]
+    print('use:',url)
+    util.geturl(url,file,cfg[1])
+
     # get pics
+    pics = []
+    n,t=lg.getpics(file)
+    for i in range(n):
+        pics.append(t[i+1])
+        print(t[i+1])
+
+    print(cj)
+    # download pics
+    os.remove('1.jpg')
+    print('down pic:',pics[0],'referer:',url)
+    util.geturl(pics[0],'1.jpg',referer=url)
 
 
-    #s=request.urlopen('http://www.6manga.com/').read()
-    #cookie = http.cookiejar.CookieJar()
-    #cjhdr  =  request.HTTPCookieProcessor(cookie)
-    #opener = request.build_opener(cjhdr)
+
     if False:
         url=scfg[0]
         d={"show":"title,btitle","keyboard":key}
