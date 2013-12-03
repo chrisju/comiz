@@ -1,4 +1,7 @@
 -- site config file
+--function showpic(pic,p){var domain="";if(pic.substring(2,3)=="/"){if(typeof(comics)!="undefined" && comics!='') domain=comics;if(typeof(ccomic)!="undefined") domain=ccomic(domain,pic);$("TheImg").src=domain+"/comics/"+pic.substring((p-1)*20,p*20)+".jpg";}
+--else {if(typeof(mangas)!="undefined" && mangas!='') domain=mangas;if(typeof(cmanga)!="undefined") domain=cmanga(domain,pic);$("TheImg").src=domain+"/mangas/"+pic.substring((p-1)*19,p*19)+".jpg";}
+--}
 
 function getconfig()
     local tab = {}
