@@ -25,11 +25,11 @@ function getcomics(datafile)
     io.input(datafile)
     local s=io.read("*all")
     for block in string.gmatch(s,'id="_ctl3_dl"(.-)id="_ctl3_tb_page"') do
-        for url,name in string.gmatch(block, '<tr id="_ctl3_dl__ctl%d_img">.-href="(.-)".-alt="(.-)".-</tr>') do
+        for url,name,update in string.gmatch(block, '<tr id="_ctl3_dl__ctl%d_img">.-href="(.-)".-alt="(.-)".-</tr>.-<tr>.-class=Comic.-<font%sclass=num>(.-)<.-</tr>') do
             name = (strip(name))
             author = ''
             url = host .. (strip(url))
-            table.insert(tab,name .. '||' .. author .. '||' .. '' .. '||' .. url )
+            table.insert(tab,name .. '||' .. author .. '||' .. update .. '||' .. url )
         end
     end
     return #tab,tab

@@ -18,11 +18,12 @@ if __name__ == '__main__':
     f=lg.strip
     print(f('\t   测试lua\t '),f)
 
-    key='孩子'
+    key='女孩'
     #lg.dofile('10_sfacg.lua')
     #lg.dofile('0_kkkmh.lua')
     #lg.dofile('2_xindm.lua')
-    lg.dofile('03_6manga.lua')
+    #lg.dofile('03_6manga.lua')
+    lg.dofile('05_dm5.lua')
 
     # init network
     cj = http.cookiejar.CookieJar()
