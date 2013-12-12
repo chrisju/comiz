@@ -1,7 +1,4 @@
 -- site config file
---function showpic(pic,p){var domain="";if(pic.substring(2,3)=="/"){if(typeof(comics)!="undefined" && comics!='') domain=comics;if(typeof(ccomic)!="undefined") domain=ccomic(domain,pic);$("TheImg").src=domain+"/comics/"+pic.substring((p-1)*20,p*20)+".jpg";}
---else {if(typeof(mangas)!="undefined" && mangas!='') domain=mangas;if(typeof(cmanga)!="undefined") domain=cmanga(domain,pic);$("TheImg").src=domain+"/mangas/"+pic.substring((p-1)*19,p*19)+".jpg";}
---}
 
 function getconfig()
     local tab = {}
@@ -15,8 +12,8 @@ end
 
 function getsearchparam(keyword)
     local tab = {}
-    local t = {["show"]="title,btitle",["keyboard"]=keyword}
-    table.insert(tab,'http://www.xindm.cn/e/search/index.php')
+    local t = {["key"]=keyword}
+    table.insert(tab,'http://www.6manga.com/page/?Search')
     table.insert(tab,encode(t))
     table.insert(tab,'POST')
     return #tab,tab
@@ -24,40 +21,47 @@ end
 
 function getcomics(datafile)
     local tab = {}
+    local host = 'http://www.6manga.com'
     io.input(datafile)
     local s=io.read("*all")
-    for url,name,author in string.gmatch(s, 'class="recommendedpic1 center".-href="(.-)".-title="(.-)".-作者:(.-)<.-</div>') do
-        name = (strip(name))
-        author = (strip(author))
-        url = (strip(url))
-        table.insert(tab,name .. '||' .. author .. '||' .. '' .. '||' .. url )
+    for block in string.gmatch(s,'id="_ctl3_dl"(.-)id="_ctl3_tb_page"') do
+        for url,name in string.gmatch(block, '<tr id="_ctl3_dl__ctl%d_img">.-href="(.-)".-alt="(.-)".-</tr>') do
+            name = (strip(name))
+            author = ''
+            url = host .. (strip(url))
+            table.insert(tab,name .. '||' .. author .. '||' .. '' .. '||' .. url )
+        end
     end
     return #tab,tab
 end
 
 function getparts(datafile)
     local tab = {}
+    local host = 'http://www.6manga.com'
     io.input(datafile)
     local s=io.read("*all")
-    for block in string.gmatch(s,'class="subsrbelist center".-</table>(.-)</table>') do
-        for url,name in string.gmatch(block, '<li>.-href="(.-)".->.->(.-)<.-</li>') do
+    for block in string.gmatch(s,'<tbody id="tr1"(.-)</tbody>') do
+        for url,name in string.gmatch(block, "<td.-href='(.-)'.->([^<>]+)<.-</td>") do
             name = (strip(name))
-            url = (strip(url))
-            table.insert(tab,name .. '||' .. url) --no need revert
+            url = host .. (strip(url))
+            table.insert(tab, 1, name .. '||' .. url)
         end
     end
     return #tab,tab
 end
 
+--function showpic(pic,p){var domain="";if(pic.substring(2,3)=="/"){if(typeof(comics)!="undefined" && comics!='') domain=comics;if(typeof(ccomic)!="undefined") domain=ccomic(domain,pic);$("TheImg").src=domain+"/comics/"+pic.substring((p-1)*20,p*20)+".jpg";}
+--else {if(typeof(mangas)!="undefined" && mangas!='') domain=mangas;if(typeof(cmanga)!="undefined") domain=cmanga(domain,pic);$("TheImg").src=domain+"/mangas/"+pic.substring((p-1)*19,p*19)+".jpg";}
+--}
 function getpics(datafile)
     local tab = {}
-    local host = "http://mh2.xindm.cn"
+    local host = "http://www.6manga.com"
     io.input(datafile)
     local s=io.read("*all")
-    local block = string.match(s,'var%sArrayPhoto.-%((.-)%)')
-    for url in string.gmatch(block, '"(.-)"') do
-        url = strip(url)
-        table.insert(tab,host .. url)
+    local block = string.match(s,"var%spic='(.-)'")
+    for url in splitn(block, 20) do
+        url = host .. '/comics/' .. strip(url) .. '.jpg'
+        table.insert(tab, url)
     end
     return #tab,tab
 end

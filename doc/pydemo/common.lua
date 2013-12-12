@@ -48,6 +48,16 @@ function split(s,pat)
     return function() if st then return getter(st, g()) end end
 end
 
+-- 把字符串分割成长度n的字符串组
+function splitn(s,n)
+    local i = 0
+    local function getter()
+        i = i + 1
+        return string.sub(s,n*(i-1)+1, n*i)
+    end
+    return function() if n*i < string.len(s) then return getter() end end
+end
+
 function escapenonascii (str)
     local s = ''
     for i=1,string.len(str) do
