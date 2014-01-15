@@ -6,7 +6,7 @@ function getconfig()
     table.insert(tab,'big5')  -- page's encoding
     table.insert(tab,'0')  -- 1:默认隐藏 0:默认显示
     table.insert(tab,'0')  -- 1:仿人行为 0:默认行为
-    table.insert(tab,'big5')  -- search's encoding
+    table.insert(tab,'big5')  -- search's encoding !!! 简体需要转换成繁体
     return #tab,tab
 end
 

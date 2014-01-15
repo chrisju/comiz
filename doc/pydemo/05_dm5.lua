@@ -28,7 +28,7 @@ function getcomics(datafile)
         for update,url,name,author in string.gmatch(block, '<div%sclass="ssnrk">.-<div%sclass="ssnr_bt">.-</font>(.-)</a>.-<div%sclass="ssnr_yt">.-href="(.-)"%stitle="(.-)".-<dt>.-<a href="#">(.-)</a></span>.-</div>') do
             name = (strip(name))
             url = host .. (strip(url))
-            print(name .. url)
+            --print(name .. url)
             table.insert(tab,name .. '||' .. author .. '||' .. update .. '||' .. url )
         end
     end
