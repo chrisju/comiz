@@ -66,7 +66,7 @@ if __name__ == '__main__':
     n,t=lg.getcomics(file)
     for i in range(n):
         comics.append(t[i+1])
-        print(t[i+1])
+        print(i+1,t[i+1])
 
     # get a comic
     url=comics[0].split('||')[3]
@@ -77,8 +77,9 @@ if __name__ == '__main__':
     parts = []
     n,t=lg.getparts(file)
     for i in range(n):
-        parts.append(t[i+1])
-        print(t[i+1])
+        parts.insert(0,t[i+1])
+    for i in range(n):
+        print(i+1,parts[i])
 
     # get a part
     url=parts[0].split('||')[1]
@@ -95,7 +96,7 @@ if __name__ == '__main__':
         n,t=lg.getpics(file)
     for i in range(n):
         pics.append(t[i+1])
-        print(t[i+1])
+        print(i+1,t[i+1])
 
     print(cj)
     # download pics
