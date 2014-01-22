@@ -63,6 +63,25 @@ if __name__ == '__main__':
     n,t=lg.gethomecomics(file)
     for i in range(n):
         comics.append(t[i+1])
+        #print(i+1,t[i+1])
+    print(comics[0])
+    #cats
+    cats = []
+    comics = []
+    n,t=lg.getcats(file)
+    for i in range(n):
+        cats.append(t[i+1])
+        print(i+1,t[i+1])
+    print(cats[0])
+    res = request.urlopen(cats[0])
+    print(res.status, res.reason)
+    s = res.read()
+    s = util.convert(s,cfg[1])
+    with open(file,'wb') as f:
+        f.write(s)
+    n,t=lg.getcatcomics(file)
+    for i in range(n):
+        comics.append(t[i+1])
         print(i+1,t[i+1])
     print(comics[0])
 
