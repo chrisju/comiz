@@ -1,0 +1,231 @@
+diff --git a/doc/pydemo/2_xindm.lua b/doc/pydemo/2_xindm.lua
+index ba45be6..dfd61cd 100644
+--- a/doc/pydemo/2_xindm.lua
++++ b/doc/pydemo/2_xindm.lua
+@@ -7,6 +7,7 @@ function getconfig()
+     table.insert(tab,'0')  -- 1:默认隐藏 0:默认显示
+     table.insert(tab,'0')  -- 1:仿人行为 0:默认行为
+     table.insert(tab,'gbk')  -- search's encoding
++    table.insert(tab,'http://xindm.cn/')  -- homepage
+     return #tab,tab
+ end
+ 
+@@ -58,3 +59,61 @@ function getpics(datafile)
+     end
+     return #tab,tab
+ end
++
++--------------- navigate ---------------------
++function gethomecomics(datafile)
++    local tab = {}
++    local host = 'http://xindm.cn'
++    io.input(datafile)
++    local s=io.read("*all")
++    local block = string.match(s,'<table.-class="hot_black"(.-)</table>')
++    for url,name in string.gmatch(block, '<tr>.-<a href="(.-)"%starget="_blank">.->(.-)</span>.-<span.-</tr>') do
++        name = (strip(name))
++        author = ''
++        update = ''
++        url = (strip(url))
++        if not startswith(url,'http://') then
++            url = host .. url
++        end
++        table.insert(tab,name .. '||' .. author .. '||' .. update .. '||' .. url )
++    end
++    block = string.match(s,'<div%sclass="flash%-tag%sr"><ul>(.-)</ul>')
++    for url,name in string.gmatch(block, '<li%sid=.-<a%shref="(.-)"%stitle="(.-)".-</li>') do
++        name = (strip(name))
++        author = ''
++        update = ''
++        url = (strip(url))
++        if not startswith(url,'http://') then
++            url = host .. url
++        end
++        table.insert(tab,name .. '||' .. author .. '||' .. update .. '||' .. url )
++    end
++    return #tab,tab
++end
++
++function getcats(datafile)
++    local tab = {}
++    local host = "http://mh2.xindm.cn"
++    io.input(datafile)
++    local s=io.read("*all")
++    local block = string.match(s,'var%sArrayPhoto.-%((.-)%)')
++    for url in string.gmatch(block, '"(.-)"') do
++        url = strip(url)
++        table.insert(tab,host .. url)
++    end
++    return #tab,tab
++end
++
++function getcatcomics(datafile)
++    local tab = {}
++    io.input(datafile)
++    local s=io.read("*all")
++    for url,name,author in string.gmatch(s, 'class="recommendedpic1 center".-href="(.-)".-title="(.-)".-作者:(.-)<.-</div>') do
++        name = (strip(name))
++        author = (strip(author))
++        url = (strip(url))
++        table.insert(tab,name .. '||' .. author .. '||' .. '' .. '||' .. url )
++    end
++    return #tab,tab
++end
++--------------- end navigate -----------------
+diff --git a/doc/pydemo/czdemo.py b/doc/pydemo/czdemo.py
+index 48bda3c..17d097e 100755
+--- a/doc/pydemo/czdemo.py
++++ b/doc/pydemo/czdemo.py
+@@ -51,89 +51,77 @@ if __name__ == '__main__':
+         scfg.append(t[i+1])
+         print(t[i+1])
+ 
+-    if scfg[2] == 'POST':
+-        res = request.urlopen(scfg[0],scfg[1].encode())
+-    elif scfg[2] == 'GET':
+-        res = request.urlopen(scfg[0] + '?' + scfg[1])
++    # navigate
++    res = request.urlopen(cfg[5])
+     print(res.status, res.reason)
+     s = res.read()
+     s = util.convert(s,cfg[1])
+     with open(file,'wb') as f:
+         f.write(s)
+-
+-    # getcomic
++    #gethomecomics
+     comics = []
+-    n,t=lg.getcomics(file)
++    n,t=lg.gethomecomics(file)
+     for i in range(n):
+         comics.append(t[i+1])
+         print(i+1,t[i+1])
+-
+-    # get a comic
+-    url=comics[0].split('||')[3]
+-    print('use:',url)
+-    util.geturl(url,file,cfg[1])
+-
+-    # get parts
+-    parts = []
+-    n,t=lg.getparts(file)
+-    for i in range(n):
+-        parts.insert(0,t[i+1])
+-    for i in range(n):
+-        print(i+1,parts[i])
+-
+-    # get a part
+-    url=parts[0].split('||')[1]
+-    print('use:',url)
+-    util.geturl(url,file,cfg[1])
+-
+-    # get pics
+-    pics = []
+-    n,t=lg.getpics(file)
+-    print('pic count:',n)
+-    while n == 1:
+-        print(t[1])
+-        util.geturl(t[1],file,cfg[1])
+-        n,t=lg.getpics(file)
+-    for i in range(n):
+-        pics.append(t[i+1])
+-        print(i+1,t[i+1])
+-
+-    print(cj)
+-    # download pics
+-    pic='1.jpg'
+-    if os.path.exists(pic):
+-        os.remove(pic)
+-    print('down pic:',pics[0],'referer:',url)
+-    util.geturl(pics[0],pic,referer=url)
+-    os.system('feh ' + pic)
+-
+-
+-
+-    if False:
+-        url=scfg[0]
+-        d={"show":"title,btitle","keyboard":key}
+-        for k,v in d.items():
+-            d[k]=v.encode(cfg[4])
+-        postdata = urllib.parse.urlencode(d)
+-        postdata = postdata.encode()
+-        print(postdata)
+-        res = request.urlopen(url,postdata)
+-        print(res.status, res.reason)
+-        s = res.read()
+-        with open('out.html','wb') as f:
+-            f.write(s)
+-    if False:
+-        url='http://www.6manga.com/page/?Search'
+-        d={'typei':'','type':'','key':key,'submit':'搜尋'}
+-        for k,v in d.items():
+-            d[k]=v.encode('big5')
+-        postdata = urllib.parse.urlencode(d)
+-        postdata = postdata.encode()
+-        print(postdata)
+-        res = request.urlopen(url,postdata)
+-        print(res.status, res.reason)
+-        s = res.read()
+-        with open('out.html','wb') as f:
+-            f.write(s)
++    print(comics[0])
++
++    ## search
++    #if scfg[2] == 'POST':
++    #    res = request.urlopen(scfg[0],scfg[1].encode())
++    #elif scfg[2] == 'GET':
++    #    res = request.urlopen(scfg[0] + '?' + scfg[1])
++    #print(res.status, res.reason)
++    #s = res.read()
++    #s = util.convert(s,cfg[1])
++    #with open(file,'wb') as f:
++    #    f.write(s)
++
++    ## getcomic
++    #comics = []
++    #n,t=lg.getcomics(file)
++    #for i in range(n):
++    #    comics.append(t[i+1])
++    #    print(i+1,t[i+1])
++
++    ## get a comic
++    ## TODO i = int(input('choose one comic: ')
++    #url=comics[0].split('||')[3]
++    #print('use:',url)
++    #util.geturl(url,file,cfg[1])
++
++    ## get parts
++    #parts = []
++    #n,t=lg.getparts(file)
++    #for i in range(n):
++    #    parts.insert(0,t[i+1])
++    #for i in range(n):
++    #    print(i+1,parts[i])
++
++    ## get a part
++    #url=parts[0].split('||')[1]
++    #print('use:',url)
++    #util.geturl(url,file,cfg[1])
++
++    ## get pics
++    #pics = []
++    #n,t=lg.getpics(file)
++    #print('pic count:',n)
++    #while n == 1:
++    #    print(t[1])
++    #    util.geturl(t[1],file,cfg[1])
++    #    n,t=lg.getpics(file)
++    #for i in range(n):
++    #    pics.append(t[i+1])
++    #    print(i+1,t[i+1])
++
++    #print(cj)
++    ## download pics
++    #pic='1.jpg'
++    #if os.path.exists(pic):
++    #    os.remove(pic)
++    #print('down pic:',pics[0],'referer:',url)
++    #util.geturl(pics[0],pic,referer=url)
++    #os.system('feh ' + pic)
+ 
+ 

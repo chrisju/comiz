@@ -54,3 +54,89 @@ function getpics(datafile)
     end
     return #tab,tab
 end
+
+--------------- navigate ---------------------
+function gethomecomics(datafile)
+    local tab = {}
+    local host = 'http://xindm.cn'
+    io.input(datafile)
+    local s=io.read("*all")
+    --1
+    local block = string.match(s,'<table.-class="hot_black"(.-)</table>')
+    for url,name in string.gmatch(block, '<tr>.-<a href="(.-)"%starget="_blank">.->(.-)</span>.-<span.-</tr>') do
+        name = (strip(name))
+        author = ''
+        update = ''
+        url = (strip(url))
+        if not startswith(url,'http://') then
+            url = host .. url
+        end
+        table.insert(tab,name .. '||' .. author .. '||' .. update .. '||' .. url )
+    end
+    --2
+    block = string.match(s,'<div%sclass="flash%-tag%sr"><ul>(.-)</ul>')
+    for url,name in string.gmatch(block, '<li%sid=.-<a%shref="(.-)"%stitle="(.-)".-</li>') do
+        name = (strip(name))
+        author = ''
+        update = ''
+        url = (strip(url))
+        if not startswith(url,'http://') then
+            url = host .. url
+        end
+        table.insert(tab,name .. '||' .. author .. '||' .. update .. '||' .. url )
+    end
+    --3
+    block = string.match(s,'class="comicswitchtext1"(.-)</td>')
+    for url,name in string.gmatch(block, '<div><a href="(.-)".-title="(.-)".-</div>') do
+        name = (strip(name))
+        author = ''
+        update = ''
+        url = (strip(url))
+        if not startswith(url,'http://') then
+            url = host .. url
+        end
+        table.insert(tab,name .. '||' .. author .. '||' .. update .. '||' .. url )
+    end
+    --4
+    block = string.match(s,'class="main1box"(.-)</div>')
+    for url,name in string.gmatch(block, '<li>.-title="(.-)".-href="(.-)".-</li>') do
+        name = (strip(name))
+        author = ''
+        update = ''
+        url = (strip(url))
+        if not startswith(url,'http://') then
+            url = host .. url
+        end
+        table.insert(tab,name .. '||' .. author .. '||' .. update .. '||' .. url )
+    end
+    return #tab,tab
+end
+
+function getcats(datafile)
+    local tab = {}
+    local host = "http://xindm.cn"
+    io.input(datafile)
+    local s=io.read("*all")
+    local block = string.match(s,'class="main4box"(.-)</table>')
+    for url in string.gmatch(block, '<ul><li>.-</li><a%shref="(.-)">.-&raquo;</a></ul>') do
+        url = host .. strip(url)
+        table.insert(tab,url)
+    end
+    return #tab,tab
+end
+
+function getcatcomics(datafile)
+    local tab = {}
+    io.input(datafile)
+    local s=io.read("*all")
+    local block = string.match(s,'class="reminderindex%sright"(.-)class="main01box"')
+    for url,name,update in string.gmatch(block, '<li>.-href="(.-)".-title="(.-)".-%[<.->(.-)</a>%].-</li>') do
+        name = (strip(name))
+        author = ''
+        url = (strip(url))
+        update = (strip(update))
+        table.insert(tab,name .. '||' .. author .. '||' .. update .. '||' .. url )
+    end
+    return #tab,tab
+end
+--------------- end navigate -----------------

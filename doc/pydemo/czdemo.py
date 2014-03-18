@@ -20,8 +20,8 @@ if __name__ == '__main__':
 
     key='女孩'
     #lg.dofile('10_sfacg.lua')
-    #lg.dofile('0_kkkmh.lua')
-    lg.dofile('2_xindm.lua')
+    lg.dofile('site/0_kkkmh.lua')
+    #lg.dofile('2_xindm.lua')
     #lg.dofile('03_6manga.lua')
     #lg.dofile('05_dm5.lua')
 
